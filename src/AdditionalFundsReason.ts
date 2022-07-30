@@ -1,4 +1,4 @@
-export enum AdditionalFunds {
+export enum AdditionalFundsReason {
     HomeRenovation = 1,
     Other = 2
   }

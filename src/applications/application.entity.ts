@@ -1,7 +1,7 @@
 import { Table, Column, Model } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { Guid } from 'guid-typescript';
-import { AdditionalFunds } from "src/AdditionalFunds";
+import { AdditionalFundsReason } from "src/AdditionalFundsReason";
 import { Applicant } from "src/applicants/applicant.entity";
 import { ImageCoordinate } from "src/ImageCoordinate";
 import { Origin } from "src/Origin";
@@ -23,7 +23,7 @@ export class Application extends Model {
     @Column
     additionalFundsRequest: number;
     @Column
-    additionalFundsReason: AdditionalFunds;
+    additionalFundsReason: AdditionalFundsReason;
     @Column
     additionalFundsNote: string;
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
