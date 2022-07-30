@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FinancialAssetsService } from './financial-assets.service';
 import { CreateFinancialAssetDto } from './dto/create-financial-asset.dto';
 import { UpdateFinancialAssetDto } from './dto/update-financial-asset.dto';
+import { Guid } from 'guid-typescript'
 
 @Controller('financial-assets')
 export class FinancialAssetsController {
@@ -18,17 +19,17 @@ export class FinancialAssetsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.financialAssetsService.findOne(+id);
+  findOne(@Param('id') id: Guid) {
+    return this.financialAssetsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFinancialAssetDto: UpdateFinancialAssetDto) {
-    return this.financialAssetsService.update(+id, updateFinancialAssetDto);
+  update(@Param('id') id: Guid, @Body() updateFinancialAssetDto: UpdateFinancialAssetDto) {
+    return this.financialAssetsService.update(id, updateFinancialAssetDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.financialAssetsService.remove(+id);
+  remove(@Param('id') id: Guid) {
+    return this.financialAssetsService.remove(id);
   }
 }

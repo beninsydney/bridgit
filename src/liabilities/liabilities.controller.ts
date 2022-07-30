@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { LiabilitiesService } from './liabilities.service';
 import { CreateLiabilityDto } from './dto/create-liability.dto';
 import { UpdateLiabilityDto } from './dto/update-liability.dto';
+import { Guid } from 'guid-typescript'
 
 @Controller('liabilities')
 export class LiabilitiesController {
@@ -18,17 +19,17 @@ export class LiabilitiesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.liabilitiesService.findOne(+id);
+  findOne(@Param('id') id: Guid) {
+    return this.liabilitiesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLiabilityDto: UpdateLiabilityDto) {
-    return this.liabilitiesService.update(+id, updateLiabilityDto);
+  update(@Param('id') id: Guid, @Body() updateLiabilityDto: UpdateLiabilityDto) {
+    return this.liabilitiesService.update(id, updateLiabilityDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.liabilitiesService.remove(+id);
+  remove(@Param('id') id: Guid) {
+    return this.liabilitiesService.remove(id);
   }
 }

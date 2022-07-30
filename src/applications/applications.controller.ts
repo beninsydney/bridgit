@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
+import { Guid } from 'guid-typescript'
 
 @Controller('applications')
 export class ApplicationsController {
@@ -18,17 +19,17 @@ export class ApplicationsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.applicationsService.findOne(+id);
+  findOne(@Param('id') id: Guid) {
+    return this.applicationsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApplicationDto: UpdateApplicationDto) {
-    return this.applicationsService.update(+id, updateApplicationDto);
+  update(@Param('id') id: Guid, @Body() updateApplicationDto: UpdateApplicationDto) {
+    return this.applicationsService.update(id, updateApplicationDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.applicationsService.remove(+id);
+  remove(@Param('id') id: Guid) {
+    return this.applicationsService.remove(id);
   }
 }

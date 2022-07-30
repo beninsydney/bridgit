@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateFinancialAssetDto } from './dto/create-financial-asset.dto';
 import { UpdateFinancialAssetDto } from './dto/update-financial-asset.dto';
 import { FinancialAsset } from './financial-asset.entity';
+import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class FinancialAssetsService {
@@ -22,7 +23,7 @@ export class FinancialAssetsService {
     return this.model.findAll<FinancialAsset>()
   }
 
-  async findOne(id: number): Promise<FinancialAsset> {
+  async findOne(id: Guid): Promise<FinancialAsset> {
     return this.model.findOne<FinancialAsset>({
       where: {
         id
@@ -30,7 +31,7 @@ export class FinancialAssetsService {
     })
   }
 
-  async update(id: number, updateFinancialAssetDto: UpdateFinancialAssetDto): Promise<FinancialAsset> {
+  async update(id: Guid, updateFinancialAssetDto: UpdateFinancialAssetDto): Promise<FinancialAsset> {
     const object = await this.model.findOne({
       where: {
         id
@@ -39,7 +40,7 @@ export class FinancialAssetsService {
     return await object.update(updateFinancialAssetDto)
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: Guid): Promise<void> {
     await this.model.destroy({
       where: {
         id

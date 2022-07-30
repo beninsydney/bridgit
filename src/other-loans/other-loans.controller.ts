@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { OtherLoansService } from './other-loans.service';
 import { CreateOtherLoanDto } from './dto/create-other-loan.dto';
 import { UpdateOtherLoanDto } from './dto/update-other-loan.dto';
+import { Guid } from 'guid-typescript'
 
 @Controller('other-loans')
 export class OtherLoansController {
@@ -18,17 +19,17 @@ export class OtherLoansController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.otherLoansService.findOne(+id);
+  findOne(@Param('id') id: Guid) {
+    return this.otherLoansService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOtherLoanDto: UpdateOtherLoanDto) {
-    return this.otherLoansService.update(+id, updateOtherLoanDto);
+  update(@Param('id') id: Guid, @Body() updateOtherLoanDto: UpdateOtherLoanDto) {
+    return this.otherLoansService.update(id, updateOtherLoanDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.otherLoansService.remove(+id);
+  remove(@Param('id') id: Guid) {
+    return this.otherLoansService.remove(id);
   }
 }

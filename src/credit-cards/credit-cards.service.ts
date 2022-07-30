@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreditCard } from './credit-card.entity';
 import { CreateCreditCardDto } from './dto/create-credit-card.dto';
 import { UpdateCreditCardDto } from './dto/update-credit-card.dto';
+import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class CreditCardsService {
@@ -22,7 +23,7 @@ export class CreditCardsService {
     return this.model.findAll<CreditCard>()
   }
 
-  async findOne(id: number): Promise<CreditCard> {
+  async findOne(id: Guid): Promise<CreditCard> {
     return this.model.findOne<CreditCard>({
       where: {
         id
@@ -30,7 +31,7 @@ export class CreditCardsService {
     })
   }
 
-  async update(id: number, updateCreditCardDto: UpdateCreditCardDto): Promise<CreditCard> {
+  async update(id: Guid, updateCreditCardDto: UpdateCreditCardDto): Promise<CreditCard> {
     const object = await this.model.findOne({
       where: {
         id
@@ -39,7 +40,7 @@ export class CreditCardsService {
     return await object.update(updateCreditCardDto)
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: Guid): Promise<void> {
     await this.model.destroy({
       where: {
         id

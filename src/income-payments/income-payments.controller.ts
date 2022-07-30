@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { IncomePaymentsService } from './income-payments.service';
 import { CreateIncomePaymentDto } from './dto/create-income-payment.dto';
 import { UpdateIncomePaymentDto } from './dto/update-income-payment.dto';
+import { Guid } from 'guid-typescript'
 
 @Controller('income-payments')
 export class IncomePaymentsController {
@@ -18,17 +19,17 @@ export class IncomePaymentsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.incomePaymentsService.findOne(+id);
+  findOne(@Param('id') id: Guid) {
+    return this.incomePaymentsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateIncomePaymentDto: UpdateIncomePaymentDto) {
-    return this.incomePaymentsService.update(+id, updateIncomePaymentDto);
+  update(@Param('id') id: Guid, @Body() updateIncomePaymentDto: UpdateIncomePaymentDto) {
+    return this.incomePaymentsService.update(id, updateIncomePaymentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.incomePaymentsService.remove(+id);
+  remove(@Param('id') id: Guid) {
+    return this.incomePaymentsService.remove(id);
   }
 }

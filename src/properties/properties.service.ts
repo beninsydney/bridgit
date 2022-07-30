@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 import { Property } from './property.entity';
+import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class PropertiesService {
@@ -22,7 +23,7 @@ export class PropertiesService {
     return this.model.findAll<Property>()
   }
 
-  async findOne(id: number): Promise<Property> {
+  async findOne(id: Guid): Promise<Property> {
     return this.model.findOne<Property>({
       where: {
         id
@@ -30,7 +31,7 @@ export class PropertiesService {
     })
   }
 
-  async update(id: number, updatePropertyDto: UpdatePropertyDto): Promise<Property> {
+  async update(id: Guid, updatePropertyDto: UpdatePropertyDto): Promise<Property> {
     const object = await this.model.findOne({
       where: {
         id
@@ -39,7 +40,7 @@ export class PropertiesService {
     return await object.update(updatePropertyDto)
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: Guid): Promise<void> {
     await this.model.destroy({
       where: {
         id
