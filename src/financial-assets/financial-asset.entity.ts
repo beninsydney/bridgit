@@ -15,5 +15,5 @@ export class FinancialAsset extends Model {
     @Column
     amount: number;
     @Column
-    instution: String;
+    institution: String;
 }
