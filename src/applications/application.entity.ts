@@ -25,11 +25,11 @@ export class Application extends Model {
     additionalFundsReason: AdditionalFunds;
     @Column
     additionalFundsNote: string;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     applicants: Applicant[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     buyingProperties: Property[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     sellingProperties: Property[];
     @Column
     heardOfBridgit: Origin;

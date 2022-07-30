@@ -14,7 +14,7 @@ export class Property extends Model {
     userid: number;
     @Column
     applicationid: number;
-    @Column ({ type: DataTypes.NUMBER })
+    @Column ({ type: DataTypes.INTEGER })
     type: PropertyType;
     @Column
     beenListedForSale: boolean;
@@ -26,7 +26,7 @@ export class Property extends Model {
     hasMortgage: boolean;
     @Column
     outstandingMortgageAmount: number;
-    @Column ({ type: DataTypes.NUMBER })
+    @Column ({ type: DataTypes.INTEGER })
     address: Address;
     @Column
     depositAmount: number;
@@ -34,11 +34,11 @@ export class Property extends Model {
     purchasePrice: number;
     @Column
     purchaseDate: Date;
-    @Column ({ type: DataTypes.NUMBER })
+    @Column ({ type: DataTypes.INTEGER })
     depositPayment: DepositMethod;
     @Column
     stampDutyPayment: StampDutyPaymentMethod;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     applicantOwnership: PropertyOwner[];
     @Column
     propertyValue: number;

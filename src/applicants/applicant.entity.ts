@@ -15,7 +15,7 @@ export class Applicant extends Model {
     userid: number;
     @Column
     applicationid: number;
-    @Column ({ type: DataTypes.NUMBER })
+    @Column ({ type: DataTypes.INTEGER })
     relationship: Relationship;
     @Column
     relationshipNote: string;
@@ -37,9 +37,9 @@ export class Applicant extends Model {
     mobilePhone: string;
     @Column
     email: string;
-    @Column ({ type: DataTypes.NUMBER })
+    @Column ({ type: DataTypes.INTEGER })
     address: Address;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     incomePayments: IncomePayment[];
     @Column
     incomeChanging: boolean;
@@ -49,7 +49,7 @@ export class Applicant extends Model {
     relationshipStatus: RelationshipStatus;
     @Column
     dependents: number;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     monthlyExpenses: MonthlyExpense[];
     @Column
     monthlyExpensesChanging: boolean;

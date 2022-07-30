@@ -13,12 +13,12 @@ export class Asset extends Model {
     applicationid: number;
     @Column
     applicantid: number;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     properties: Property[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     savings: FinancialAsset[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     shares: FinancialAsset[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     superannuation: FinancialAsset[];
 }

@@ -14,10 +14,10 @@ export class Liability extends Model {
     applicationid: number;
     @Column
     applicantid: number;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     creditCards: CreditCard[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     carLoans: CarLoan[];
-    @Column ({ type: DataTypes.ARRAY(DataTypes.NUMBER) })
+    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
     otherLoans: OtherLoan[];
 }
