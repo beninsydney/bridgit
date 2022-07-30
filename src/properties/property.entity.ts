@@ -37,10 +37,8 @@ export class Property extends Model {
     purchaseDate: Date;
     @Column ({ type: DataTypes.INTEGER })
     depositPayment: DepositMethod;
-    @Column
+    @Column ({ type: DataTypes.INTEGER })
     stampDutyPayment: StampDutyPaymentMethod;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.INTEGER) })
-    applicantOwnership: PropertyOwner[];
     @Column
     propertyValue: number;
     @Column
