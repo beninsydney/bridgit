@@ -11,11 +11,11 @@ export class PropertyOwner extends Model {
             return Guid.create().toString() 
         } 
     })
-    id: Guid;
+    id!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    applicantid: Guid;
+    applicantid!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    propertyid: Guid;
+    propertyid!: Guid;
     @Column
     percent: number;
 }

@@ -11,13 +11,13 @@ export class CarLoan extends Model {
             return Guid.create().toString() 
         } 
     })
-    id: Guid;
+    id!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    userid: Guid;
+    userid!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    applicationid: Guid;
+    applicationid!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    applicantid: Guid;
+    applicantid!: Guid;
     @Column
     vehicleMake: String;
     @Column

@@ -11,5 +11,5 @@ export class User extends Model {
         return Guid.create().toString() 
     } 
   })
-  id: Guid;
+  id!: Guid;
 }

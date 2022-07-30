@@ -14,9 +14,9 @@ export class Application extends Model {
             return Guid.create().toString() 
         } 
     })
-    id: Guid;
+    id!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    userid: Guid;
+    userid!: Guid;
     @Column({ type: DataTypes.INTEGER })
     loanPurpose: LoanPurpose;
     @Column

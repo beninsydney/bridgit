@@ -11,15 +11,15 @@ export class Address extends Model {
             return Guid.create().toString() 
         } 
     })
-    id: Guid;
+    id!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    userid: Guid;
+    userid!: Guid;
     @Column({ type: DataTypes.STRING(64) })
-    applicationid: Guid;
+    applicationid!: Guid;
     @Column
     line1: string;
     @Column
-    line2: string;
+    line2?: string;
     @Column
     city: string;
     @Column
