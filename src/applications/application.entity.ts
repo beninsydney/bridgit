@@ -58,6 +58,4 @@ export class Application extends Model {
     agreeToPrivacyAndIdentityCheck: boolean;
     @Column
     talkToTeam: boolean;
-    @Column ({ type: DataTypes.ARRAY(DataTypes.STRING) })
-    drawSignature: ImageCoordinate[];
 }
