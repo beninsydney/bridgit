@@ -3,33 +3,34 @@ import { OtherLoansService } from './other-loans.service';
 import { CreateOtherLoanDto } from './dto/create-other-loan.dto';
 import { UpdateOtherLoanDto } from './dto/update-other-loan.dto';
 import { Guid } from 'guid-typescript'
+import { OtherLoan } from './other-loan.entity';
 
 @Controller('other-loans')
 export class OtherLoansController {
   constructor(private readonly otherLoansService: OtherLoansService) {}
 
   @Post()
-  create(@Body() createOtherLoanDto: CreateOtherLoanDto) {
+  async create(@Body() createOtherLoanDto: CreateOtherLoanDto): Promise<OtherLoan> {
     return this.otherLoansService.create(createOtherLoanDto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<OtherLoan[]> {
     return this.otherLoansService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: Guid) {
+  async findOne(@Param('id') id: Guid): Promise<OtherLoan> {
     return this.otherLoansService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: Guid, @Body() updateOtherLoanDto: UpdateOtherLoanDto) {
+  async update(@Param('id') id: Guid, @Body() updateOtherLoanDto: UpdateOtherLoanDto): Promise<OtherLoan> {
     return this.otherLoansService.update(id, updateOtherLoanDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: Guid) {
+  async remove(@Param('id') id: Guid): Promise<void> {
     return this.otherLoansService.remove(id);
   }
 }

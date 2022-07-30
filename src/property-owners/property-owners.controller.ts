@@ -3,33 +3,34 @@ import { PropertyOwnersService } from './property-owners.service';
 import { CreatePropertyOwnerDto } from './dto/create-property-owner.dto';
 import { UpdatePropertyOwnerDto } from './dto/update-property-owner.dto';
 import { Guid } from 'guid-typescript'
+import { PropertyOwner } from './property-owner.entity';
 
 @Controller('property-owners')
 export class PropertyOwnersController {
   constructor(private readonly propertyOwnersService: PropertyOwnersService) {}
 
   @Post()
-  create(@Body() createPropertyOwnerDto: CreatePropertyOwnerDto) {
+  async create(@Body() createPropertyOwnerDto: CreatePropertyOwnerDto): Promise<PropertyOwner> {
     return this.propertyOwnersService.create(createPropertyOwnerDto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<PropertyOwner[]> {
     return this.propertyOwnersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: Guid) {
+  async findOne(@Param('id') id: Guid): Promise<PropertyOwner> {
     return this.propertyOwnersService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: Guid, @Body() updatePropertyOwnerDto: UpdatePropertyOwnerDto) {
+  async update(@Param('id') id: Guid, @Body() updatePropertyOwnerDto: UpdatePropertyOwnerDto): Promise<PropertyOwner> {
     return this.propertyOwnersService.update(id, updatePropertyOwnerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: Guid) {
+  async remove(@Param('id') id: Guid): Promise<void> {
     return this.propertyOwnersService.remove(id);
   }
 }

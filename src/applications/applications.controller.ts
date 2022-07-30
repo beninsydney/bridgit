@@ -1,35 +1,43 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Injectable, Inject, Scope, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { Guid } from 'guid-typescript'
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
+import { Application } from './application.entity';
 
 @Controller('applications')
+@Injectable({ scope: Scope.REQUEST })
 export class ApplicationsController {
-  constructor(private readonly applicationsService: ApplicationsService) {}
+  constructor(
+    @Inject(REQUEST) private readonly request: Request, 
+    private readonly applicationsService: ApplicationsService
+  ) {}
 
   @Post()
-  create(@Body() createApplicationDto: CreateApplicationDto) {
+  async create(@Body() createApplicationDto: CreateApplicationDto): Promise<Application> {
     return this.applicationsService.create(createApplicationDto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<Application[]> {
+    const user = this.request['user']
     return this.applicationsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: Guid) {
+  async findOne(@Param('id') id: Guid): Promise<Application> {
     return this.applicationsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: Guid, @Body() updateApplicationDto: UpdateApplicationDto) {
+  async update(@Param('id') id: Guid, @Body() updateApplicationDto: UpdateApplicationDto): Promise<Application> {
     return this.applicationsService.update(id, updateApplicationDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: Guid) {
+  async remove(@Param('id') id: Guid): Promise<void> {
     return this.applicationsService.remove(id);
   }
 }

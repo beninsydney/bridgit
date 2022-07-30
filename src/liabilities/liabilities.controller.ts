@@ -3,33 +3,34 @@ import { LiabilitiesService } from './liabilities.service';
 import { CreateLiabilityDto } from './dto/create-liability.dto';
 import { UpdateLiabilityDto } from './dto/update-liability.dto';
 import { Guid } from 'guid-typescript'
+import { Liability } from './liability.entity';
 
 @Controller('liabilities')
 export class LiabilitiesController {
   constructor(private readonly liabilitiesService: LiabilitiesService) {}
 
   @Post()
-  create(@Body() createLiabilityDto: CreateLiabilityDto) {
+  async create(@Body() createLiabilityDto: CreateLiabilityDto): Promise<Liability> {
     return this.liabilitiesService.create(createLiabilityDto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<Liability[]> {
     return this.liabilitiesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: Guid) {
+  async findOne(@Param('id') id: Guid): Promise<Liability> {
     return this.liabilitiesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: Guid, @Body() updateLiabilityDto: UpdateLiabilityDto) {
+  async update(@Param('id') id: Guid, @Body() updateLiabilityDto: UpdateLiabilityDto): Promise<Liability> {
     return this.liabilitiesService.update(id, updateLiabilityDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: Guid) {
+  async remove(@Param('id') id: Guid): Promise<void> {
     return this.liabilitiesService.remove(id);
   }
 }

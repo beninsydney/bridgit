@@ -19,8 +19,12 @@ export class ApplicantsService {
     return object.save()
   }
 
-  async findAll(): Promise<Applicant[]> {
-    return this.model.findAll<Applicant>()
+  async findAll(applicationid?: Guid): Promise<Applicant[]> {
+    return this.model.findAll<Applicant>({
+      where: {
+        applicationid
+      }
+    })
   }
 
   async findOne(id: Guid): Promise<Applicant> {
