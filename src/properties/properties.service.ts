@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import { Property } from './property.entity';
 
 @Injectable()
 export class PropertiesService {
-  create(createPropertyDto: CreatePropertyDto) {
-    return 'This action adds a new property';
+  constructor(
+    @Inject('PROPERTIES_REPOSITORY')
+    private model: typeof Property
+  ) {}
+
+  async create(createPropertyDto: CreatePropertyDto): Promise<Property> {
+    const object = new Property()
+    for (const field in createPropertyDto) {
+      object[field] = createPropertyDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all properties`;
+  async findAll(): Promise<Property[]> {
+    return this.model.findAll<Property>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} property`;
+  async findOne(id: number): Promise<Property> {
+    return this.model.findOne<Property>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updatePropertyDto: UpdatePropertyDto) {
-    return `This action updates a #${id} property`;
+  async update(id: number, updatePropertyDto: UpdatePropertyDto): Promise<Property> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updatePropertyDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} property`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

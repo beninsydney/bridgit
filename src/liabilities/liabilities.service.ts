@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateLiabilityDto } from './dto/create-liability.dto';
 import { UpdateLiabilityDto } from './dto/update-liability.dto';
+import { Liability } from './liability.entity';
 
 @Injectable()
 export class LiabilitiesService {
-  create(createLiabilityDto: CreateLiabilityDto) {
-    return 'This action adds a new liability';
+  constructor(
+    @Inject('LIABILITIES_REPOSITORY')
+    private model: typeof Liability
+  ) {}
+
+  async create(createLiabilityDto: CreateLiabilityDto): Promise<Liability> {
+    const object = new Liability()
+    for (const field in createLiabilityDto) {
+      object[field] = createLiabilityDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all liabilities`;
+  async findAll(): Promise<Liability[]> {
+    return this.model.findAll<Liability>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} liability`;
+  async findOne(id: number): Promise<Liability> {
+    return this.model.findOne<Liability>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateLiabilityDto: UpdateLiabilityDto) {
-    return `This action updates a #${id} liability`;
+  async update(id: number, updateLiabilityDto: UpdateLiabilityDto): Promise<Liability> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateLiabilityDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} liability`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

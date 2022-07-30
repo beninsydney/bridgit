@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { CreditCard } from './credit-card.entity';
 import { CreateCreditCardDto } from './dto/create-credit-card.dto';
 import { UpdateCreditCardDto } from './dto/update-credit-card.dto';
 
 @Injectable()
 export class CreditCardsService {
-  create(createCreditCardDto: CreateCreditCardDto) {
-    return 'This action adds a new creditCard';
+  constructor(
+    @Inject('CREDIT_CARDS_REPOSITORY')
+    private model: typeof CreditCard
+  ) {}
+
+  async create(createCreditCardDto: CreateCreditCardDto): Promise<CreditCard> {
+    const object = new CreditCard()
+    for (const field in createCreditCardDto) {
+      object[field] = createCreditCardDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all creditCards`;
+  async findAll(): Promise<CreditCard[]> {
+    return this.model.findAll<CreditCard>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} creditCard`;
+  async findOne(id: number): Promise<CreditCard> {
+    return this.model.findOne<CreditCard>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateCreditCardDto: UpdateCreditCardDto) {
-    return `This action updates a #${id} creditCard`;
+  async update(id: number, updateCreditCardDto: UpdateCreditCardDto): Promise<CreditCard> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateCreditCardDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} creditCard`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

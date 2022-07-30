@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateMonthlyExpenseDto } from './dto/create-monthly-expense.dto';
 import { UpdateMonthlyExpenseDto } from './dto/update-monthly-expense.dto';
+import { MonthlyExpense } from './monthly-expense.entity';
 
 @Injectable()
 export class MonthlyExpensesService {
-  create(createMonthlyExpenseDto: CreateMonthlyExpenseDto) {
-    return 'This action adds a new monthlyExpense';
+  constructor(
+    @Inject('MONTHLY_EXPENSES_REPOSITORY')
+    private model: typeof MonthlyExpense
+  ) {}
+
+  async create(createMonthlyExpenseDto: CreateMonthlyExpenseDto): Promise<MonthlyExpense> {
+    const object = new MonthlyExpense()
+    for (const field in createMonthlyExpenseDto) {
+      object[field] = createMonthlyExpenseDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all monthlyExpenses`;
+  async findAll(): Promise<MonthlyExpense[]> {
+    return this.model.findAll<MonthlyExpense>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} monthlyExpense`;
+  async findOne(id: number): Promise<MonthlyExpense> {
+    return this.model.findOne<MonthlyExpense>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateMonthlyExpenseDto: UpdateMonthlyExpenseDto) {
-    return `This action updates a #${id} monthlyExpense`;
+  async update(id: number, updateMonthlyExpenseDto: UpdateMonthlyExpenseDto): Promise<MonthlyExpense> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateMonthlyExpenseDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} monthlyExpense`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

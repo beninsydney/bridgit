@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { Asset } from './asset.entity';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 
 @Injectable()
 export class AssetsService {
-  create(createAssetDto: CreateAssetDto) {
-    return 'This action adds a new asset';
+  constructor(
+    @Inject('ASSETS_REPOSITORY')
+    private model: typeof Asset
+  ) {}
+
+  async create(createAssetDto: CreateAssetDto): Promise<Asset> {
+    const object = new Asset()
+    for (const field in createAssetDto) {
+      object[field] = createAssetDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all assets`;
+  async findAll(): Promise<Asset[]> {
+    return this.model.findAll<Asset>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} asset`;
+  async findOne(id: number): Promise<Asset> {
+    return this.model.findOne<Asset>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateAssetDto: UpdateAssetDto) {
-    return `This action updates a #${id} asset`;
+  async update(id: number, updateAssetDto: UpdateAssetDto): Promise<Asset> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateAssetDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} asset`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

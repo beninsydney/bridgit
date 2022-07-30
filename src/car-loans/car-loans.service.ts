@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { CarLoan } from './car-loan.entity';
 import { CreateCarLoanDto } from './dto/create-car-loan.dto';
 import { UpdateCarLoanDto } from './dto/update-car-loan.dto';
 
 @Injectable()
 export class CarLoansService {
-  create(createCarLoanDto: CreateCarLoanDto) {
-    return 'This action adds a new carLoan';
+  constructor(
+    @Inject('CAR_LOANS_REPOSITORY')
+    private model: typeof CarLoan
+  ) {}
+
+  async create(createCarLoanDto: CreateCarLoanDto): Promise<CarLoan> {
+    const object = new CarLoan()
+    for (const field in createCarLoanDto) {
+      object[field] = createCarLoanDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all carLoans`;
+  async findAll(): Promise<CarLoan[]> {
+    return this.model.findAll<CarLoan>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} carLoan`;
+  async findOne(id: number): Promise<CarLoan> {
+    return this.model.findOne<CarLoan>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateCarLoanDto: UpdateCarLoanDto) {
-    return `This action updates a #${id} carLoan`;
+  async update(id: number, updateCarLoanDto: UpdateCarLoanDto): Promise<CarLoan> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateCarLoanDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} carLoan`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

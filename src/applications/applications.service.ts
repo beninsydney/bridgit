@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { Application } from './application.entity';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 
 @Injectable()
 export class ApplicationsService {
-  create(createApplicationDto: CreateApplicationDto) {
-    return 'This action adds a new application';
+  constructor(
+    @Inject('APPLICATIONS_REPOSITORY')
+    private model: typeof Application
+  ) {}
+
+  async create(createApplicationDto: CreateApplicationDto): Promise<Application> {
+    const object = new Application()
+    for (const field in createApplicationDto) {
+      object[field] = createApplicationDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all applications`;
+  async findAll(): Promise<Application[]> {
+    return this.model.findAll<Application>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} application`;
+  async findOne(id: number): Promise<Application> {
+    return this.model.findOne<Application>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateApplicationDto: UpdateApplicationDto) {
-    return `This action updates a #${id} application`;
+  async update(id: number, updateApplicationDto: UpdateApplicationDto): Promise<Application> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateApplicationDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} application`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }

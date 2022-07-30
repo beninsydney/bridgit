@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateIncomePaymentDto } from './dto/create-income-payment.dto';
 import { UpdateIncomePaymentDto } from './dto/update-income-payment.dto';
+import { IncomePayment } from './income-payment.entity';
 
 @Injectable()
 export class IncomePaymentsService {
-  create(createIncomePaymentDto: CreateIncomePaymentDto) {
-    return 'This action adds a new incomePayment';
+  constructor(
+    @Inject('INCOME_PAYMENTS_REPOSITORY')
+    private model: typeof IncomePayment
+  ) {}
+
+  async create(createIncomePaymentDto: CreateIncomePaymentDto): Promise<IncomePayment> {
+    const object = new IncomePayment()
+    for (const field in createIncomePaymentDto) {
+      object[field] = createIncomePaymentDto[field]
+    }
+    return object.save()
   }
 
-  findAll() {
-    return `This action returns all incomePayments`;
+  async findAll(): Promise<IncomePayment[]> {
+    return this.model.findAll<IncomePayment>()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} incomePayment`;
+  async findOne(id: number): Promise<IncomePayment> {
+    return this.model.findOne<IncomePayment>({
+      where: {
+        id
+      }
+    })
   }
 
-  update(id: number, updateIncomePaymentDto: UpdateIncomePaymentDto) {
-    return `This action updates a #${id} incomePayment`;
+  async update(id: number, updateIncomePaymentDto: UpdateIncomePaymentDto): Promise<IncomePayment> {
+    const object = await this.model.findOne({
+      where: {
+        id
+      }
+    })
+    return await object.update(updateIncomePaymentDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} incomePayment`;
+  async remove(id: number): Promise<void> {
+    await this.model.destroy({
+      where: {
+        id
+      }
+    })
   }
 }
