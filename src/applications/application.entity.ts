@@ -1,9 +1,8 @@
 import { Table, Column, Model } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { Guid } from 'guid-typescript';
-import { AdditionalFundsReason } from "src/AdditionalFundsReason";
-import { ImageCoordinate } from "src/ImageCoordinate";
-import { Origin } from "src/Origin";
+import { AdditionalFundsReason } from "../AdditionalFundsReason";
+import { Origin } from "../Origin";
 import { LoanPurpose } from "../LoanPurpose";
 
 @Table
@@ -18,7 +17,7 @@ export class Application extends Model {
     id: Guid;
     @Column({ type: DataTypes.STRING(64) })
     userid: Guid;
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     loanPurpose: LoanPurpose;
     @Column
     savingsContribution: number;
@@ -26,7 +25,7 @@ export class Application extends Model {
     giftedSavingsAmount: number;
     @Column
     additionalFundsRequest: number;
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     additionalFundsReason: AdditionalFundsReason;
     @Column
     additionalFundsNote: string;
@@ -36,7 +35,7 @@ export class Application extends Model {
     buyingProperties: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
     sellingProperties: Guid[];
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     heardOfBridgit: Origin;
     @Column
     heardOfBridgitNote: string;
