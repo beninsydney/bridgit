@@ -1,4 +1,5 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
+import { Guid } from 'guid-typescript';
 import { Table, Column, Model } from 'sequelize-typescript';
 import { Address } from "src/address/address.entity";
 import { PropertyOwner } from "src/property-owners/property-owner.entity";
@@ -8,12 +9,12 @@ import { StampDutyPaymentMethod } from "../StampDutyPaymentMethod";
 
 @Table
 export class Property extends Model {
-    @Column({ primaryKey: true })
-    id: number;
-    @Column
-    userid: number;
-    @Column
-    applicationid: number;
+    @Column({ primaryKey: true, type: DataTypes.STRING(64) })
+    id: Guid;
+    @Column({ type: DataTypes.STRING(64) })
+    userid: Guid;
+    @Column({ type: DataTypes.STRING(64) })
+    applicationid: Guid;
     @Column ({ type: DataTypes.INTEGER })
     type: PropertyType;
     @Column

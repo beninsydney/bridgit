@@ -1,5 +1,6 @@
 import { Table, Column, Model } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { Guid } from 'guid-typescript';
 import { AdditionalFunds } from "src/AdditionalFunds";
 import { Applicant } from "src/applicants/applicant.entity";
 import { ImageCoordinate } from "src/ImageCoordinate";
@@ -9,10 +10,10 @@ import { LoanPurpose } from "../LoanPurpose";
 
 @Table
 export class Application extends Model {
-    @Column({ primaryKey: true })
-    id: number;
-    @Column
-    userid: number;
+    @Column({ primaryKey: true, type: DataTypes.STRING(64) })
+    id: Guid;
+    @Column({ type: DataTypes.STRING(64) })
+    userid: Guid;
     @Column
     loanPurpose: LoanPurpose;
     @Column

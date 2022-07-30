@@ -1,4 +1,5 @@
 import { Table, Column, Model } from 'sequelize-typescript';
+import { Guid } from 'guid-typescript';
 import { DataTypes } from 'sequelize';
 import { Address } from "src/address/address.entity";
 import { Gender } from "src/Gender";
@@ -9,12 +10,12 @@ import { RelationshipStatus } from "src/RelationshipStatus";
 
 @Table
 export class Applicant extends Model {
-    @Column({ primaryKey: true })
-    id: number;
-    @Column
-    userid: number;
-    @Column
-    applicationid: number;
+    @Column({ primaryKey: true, type: DataTypes.STRING(64) })
+    id: Guid;
+    @Column({ type: DataTypes.STRING(64) })
+    userid: Guid;
+    @Column({ type: DataTypes.STRING(64) })
+    applicationid: Guid;
     @Column ({ type: DataTypes.INTEGER })
     relationship: Relationship;
     @Column
