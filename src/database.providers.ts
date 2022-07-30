@@ -13,6 +13,7 @@ import { MonthlyExpense } from './monthly-expenses/monthly-expense.entity';
 import { OtherLoan } from './other-loans/other-loan.entity';
 import { Property } from './properties/property.entity';
 import { PropertyOwner } from './property-owners/property-owner.entity';
+import { User } from './users/user.entity';
 
 export const databaseProviders = [
   {
@@ -32,7 +33,8 @@ export const databaseProviders = [
         MonthlyExpense,
         OtherLoan, 
         Property, 
-        PropertyOwner
+        PropertyOwner,
+        User
       ]);
       await sequelize.sync();
       return sequelize;
