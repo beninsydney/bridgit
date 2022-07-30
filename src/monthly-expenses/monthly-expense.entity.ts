@@ -11,7 +11,7 @@ export class MonthlyExpense extends Model {
     applicationid: number;
     @Column
     applicantid: number;
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     type: ExpenseType;
     @Column
     amount: number;

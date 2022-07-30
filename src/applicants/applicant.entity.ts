@@ -31,7 +31,7 @@ export class Applicant extends Model {
     gender: Gender;
     @Column
     genderNote: string;
-    @Column
+    @Column({ type: DataTypes.DATEONLY })
     dateOfBirth: Date;
     @Column
     mobilePhone: string;

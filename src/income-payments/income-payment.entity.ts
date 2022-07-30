@@ -10,9 +10,9 @@ export class IncomePayment extends Model {
     applicationid: number;
     @Column
     applicantid: number;
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     source: IncomeSource;
-    @Column
+    @Column({ type: DataTypes.INTEGER })
     period: TimePeriod;
     @Column
     amount: number;

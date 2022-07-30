@@ -32,7 +32,7 @@ export class Property extends Model {
     depositAmount: number;
     @Column
     purchasePrice: number;
-    @Column
+    @Column({ type: DataTypes.DATEONLY })
     purchaseDate: Date;
     @Column ({ type: DataTypes.INTEGER })
     depositPayment: DepositMethod;
