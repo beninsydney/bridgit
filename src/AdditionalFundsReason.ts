@@ -1,4 +1,4 @@
 export enum AdditionalFundsReason {
-    HomeRenovation = 1,
-    Other = 2
-  }
+  HomeRenovation = 1,
+  Other = 2
+}

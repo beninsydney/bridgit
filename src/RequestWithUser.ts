@@ -1,20 +1,22 @@
 
-import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { Injectable, NestMiddleware } from '@nestjs/common'
+import { NextFunction } from 'express'
 import { Guid } from 'guid-typescript'
-import { User  } from './users/user.entity';
-import { Application } from './applications/application.entity';
+import { User } from './users/user.entity'
+import { Application } from './applications/application.entity'
 
 @Injectable()
 export class RequestWithUser implements NestMiddleware {
-  async use(req: Request, res: Response, next: NextFunction) {
-    let user:User;
-    if (req.headers['userid']) {
-      const userid = Guid.parse(req.headers['userid'] as string)
-      user = await User.findOne({ where: {
-        id: userid
-      }})
-      if (!user) {
+  async use (req: Record<string, any>, _, next: NextFunction): Promise<void> {
+    const userid: string = req.headers.userid as string
+    let user: User
+    if (userid !== null && userid !== '') {
+      user = await User.findOne({
+        where: {
+          id: Guid.parse(userid)
+        }
+      })
+      if (user === null || user === undefined) {
         throw new Error('invalid-user')
       }
     } else {
@@ -25,13 +27,13 @@ export class RequestWithUser implements NestMiddleware {
         userid: user.id.toString()
       }
     })
-    if (!application) {
+    if (application === null || application === undefined) {
       application = await Application.create({
         userid: user.id
       })
     }
-    req['user'] = user
-    req['application'] = application
-    next();
+    req.user = user
+    req.application = application
+    return next()
   }
 }

@@ -1,7 +1,7 @@
-import { Guid } from 'guid-typescript';
+import { Guid } from 'guid-typescript'
 
 export class CreatePropertyOwnerDto {
-  applicantid: Guid;
-  propertyid: Guid;
-  percent: number;
+  applicantid: Guid
+  propertyid: Guid
+  percent: number
 }

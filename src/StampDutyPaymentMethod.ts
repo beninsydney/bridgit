@@ -1,4 +1,4 @@
 export enum StampDutyPaymentMethod {
-    OnSettlement = 1,
-    BeforeSettlement = 2
-  }
+  OnSettlement = 1,
+  BeforeSettlement = 2
+}

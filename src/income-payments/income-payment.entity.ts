@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
-import { Guid } from 'guid-typescript';
-import { Table, Column, Model } from 'sequelize-typescript';
-import { IncomeSource } from "src/IncomeSource";
-import { TimePeriod } from "src/TimePeriod";
+import { Guid } from 'guid-typescript'
+import { Table, Column, Model } from 'sequelize-typescript'
+import { IncomeSource } from 'src/IncomeSource'
+import { TimePeriod } from 'src/TimePeriod'
 
 @Table
 export class IncomePayment extends Model {
@@ -13,17 +13,23 @@ export class IncomePayment extends Model {
       return Guid.create().toString()
     }
   })
-  id!: Guid;
+  id!: Guid
+
   @Column({ type: DataTypes.STRING(64) })
-  userid!: Guid;
+  userid!: Guid
+
   @Column({ type: DataTypes.STRING(64) })
-  applicationid!: Guid;
+  applicationid!: Guid
+
   @Column({ type: DataTypes.STRING(64) })
-  applicantid!: Guid;
+  applicantid!: Guid
+
   @Column({ type: DataTypes.INTEGER })
-  source: IncomeSource;
+  source: IncomeSource
+
   @Column({ type: DataTypes.INTEGER })
-  period: TimePeriod;
+  period: TimePeriod
+
   @Column
-  amount: number;
+  amount: number
 }

@@ -1,10 +1,10 @@
-import { Guid } from 'guid-typescript';
+import { Guid } from 'guid-typescript'
 
 export class CreateCreditCardDto {
-  userid: Guid;
-  applicationid: Guid;
-  applicantid: Guid;
-  institution: String;
-  creditLimit: number;
-  amountOwing: number;
+  userid: Guid
+  applicationid: Guid
+  applicantid: Guid
+  institution: String
+  creditLimit: number
+  amountOwing: number
 }

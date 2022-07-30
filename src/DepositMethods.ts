@@ -1,4 +1,4 @@
 export enum DepositMethod {
-    CashPayment = 1,
-    DepositBond = 2
-  }
+  CashPayment = 1,
+  DepositBond = 2
+}
