@@ -1,14 +1,19 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript';
 import { Table, Column, Model } from 'sequelize-typescript';
-import { PropertyOwner } from "src/property-owners/property-owner.entity";
 import { DepositMethod } from "../DepositMethods";
 import { PropertyType } from "../PropertyType";
 import { StampDutyPaymentMethod } from "../StampDutyPaymentMethod";
 
 @Table
 export class Property extends Model {
-    @Column({ primaryKey: true, type: DataTypes.STRING(64) })
+    @Column({ 
+        primaryKey: true, 
+        type: DataTypes.STRING(64), 
+        defaultValue: () => { 
+            return Guid.create().toString() 
+        } 
+    })
     id: Guid;
     @Column({ type: DataTypes.STRING(64) })
     userid: Guid;

@@ -5,7 +5,13 @@ import { ExpenseType } from "src/ExpenseType";
 
 @Table
 export class MonthlyExpense extends Model {
-    @Column({ primaryKey: true, type: DataTypes.STRING(64) })
+    @Column({ 
+        primaryKey: true, 
+        type: DataTypes.STRING(64), 
+        defaultValue: () => { 
+            return Guid.create().toString() 
+        } 
+    })
     id: Guid;
     @Column({ type: DataTypes.STRING(64) })
     userid: Guid;
