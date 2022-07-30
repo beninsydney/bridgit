@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript';
 import { Table, Column, Model } from 'sequelize-typescript';
-import { Address } from "src/address/address.entity";
 import { PropertyOwner } from "src/property-owners/property-owner.entity";
 import { DepositMethod } from "../DepositMethods";
 import { PropertyType } from "../PropertyType";
@@ -27,8 +26,8 @@ export class Property extends Model {
     hasMortgage: boolean;
     @Column
     outstandingMortgageAmount: number;
-    @Column ({ type: DataTypes.INTEGER })
-    address: Address;
+    @Column ({ type: DataTypes.STRING(64) })
+    address: Guid;
     @Column
     depositAmount: number;
     @Column

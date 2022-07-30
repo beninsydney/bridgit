@@ -15,11 +15,11 @@ export class Asset extends Model {
     @Column({ type: DataTypes.STRING(64) })
     applicantid: Guid;
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    properties: Property[];
+    properties: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    savings: FinancialAsset[];
+    savings: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    shares: FinancialAsset[];
+    shares: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    superannuation: FinancialAsset[];
+    superannuation: Guid[];
 }

@@ -2,10 +2,8 @@ import { Table, Column, Model } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { Guid } from 'guid-typescript';
 import { AdditionalFundsReason } from "src/AdditionalFundsReason";
-import { Applicant } from "src/applicants/applicant.entity";
 import { ImageCoordinate } from "src/ImageCoordinate";
 import { Origin } from "src/Origin";
-import { Property } from "src/properties/property.entity";
 import { LoanPurpose } from "../LoanPurpose";
 
 @Table
@@ -27,11 +25,11 @@ export class Application extends Model {
     @Column
     additionalFundsNote: string;
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    applicants: Applicant[];
+    applicants: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    buyingProperties: Property[];
+    buyingProperties: Guid[];
     @Column ({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-    sellingProperties: Property[];
+    sellingProperties: Guid[];
     @Column
     heardOfBridgit: Origin;
     @Column
