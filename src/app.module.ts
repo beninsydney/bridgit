@@ -14,6 +14,7 @@ import { CreditCardsModule } from './credit-cards/credit-cards.module';
 import { CarLoansModule } from './car-loans/car-loans.module';
 import { OtherLoansModule } from './other-loans/other-loans.module';
 import { PropertyOwnersModule } from './property-owners/property-owners.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { PropertyOwnersModule } from './property-owners/property-owners.module';
     CreditCardsModule, 
     CarLoansModule, 
     OtherLoansModule, 
-    PropertyOwnersModule
+    PropertyOwnersModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
