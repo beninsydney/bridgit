@@ -1,5 +1,5 @@
-import { IncomeSource } from 'src/IncomeSource'
-import { TimePeriod } from 'src/TimePeriod'
+import { IncomeSource } from '../../enums/IncomeSource'
+import { TimePeriod } from '../../enums/TimePeriod'
 
 export class CreateIncomePaymentDto {
   source?: IncomeSource | undefined

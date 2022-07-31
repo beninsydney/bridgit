@@ -1,7 +1,7 @@
 import { Guid } from 'guid-typescript'
-import { DepositMethod } from 'src/DepositMethods'
-import { PropertyType } from 'src/PropertyType'
-import { StampDutyPaymentMethod } from 'src/StampDutyPaymentMethod'
+import { DepositMethod } from '../../enums/DepositMethods'
+import { PropertyType } from '../../enums/PropertyType'
+import { StampDutyPaymentMethod } from '../../enums/StampDutyPaymentMethod'
 
 export class CreatePropertyDto {
   type?: PropertyType | undefined

@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
 import { Table, Column, Model } from 'sequelize-typescript'
-import { ExpenseType } from 'src/ExpenseType'
+import { ExpenseType } from '../enums/ExpenseType'
 
 @Table
 export class MonthlyExpense extends Model {

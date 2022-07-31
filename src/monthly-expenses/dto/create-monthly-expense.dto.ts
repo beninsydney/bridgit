@@ -1,4 +1,4 @@
-import { ExpenseType } from 'src/ExpenseType'
+import { ExpenseType } from '../../enums/ExpenseType'
 
 export class CreateMonthlyExpenseDto {
   type?: ExpenseType | undefined

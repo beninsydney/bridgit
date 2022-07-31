@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
 import { Table, Column, Model } from 'sequelize-typescript'
-import { IncomeSource } from 'src/IncomeSource'
-import { TimePeriod } from 'src/TimePeriod'
+import { IncomeSource } from '../enums/IncomeSource'
+import { TimePeriod } from '../enums/TimePeriod'
 
 @Table
 export class IncomePayment extends Model {
