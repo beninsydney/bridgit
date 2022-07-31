@@ -8,9 +8,7 @@ import { ApplicantsModule } from './applicants/applicants.module'
 import { AddressModule } from './address/address.module'
 import { IncomePaymentsModule } from './income-payments/income-payments.module'
 import { MonthlyExpensesModule } from './monthly-expenses/monthly-expenses.module'
-import { AssetsModule } from './assets/assets.module'
 import { FinancialAssetsModule } from './financial-assets/financial-assets.module'
-import { LiabilitiesModule } from './liabilities/liabilities.module'
 import { CreditCardsModule } from './credit-cards/credit-cards.module'
 import { CarLoansModule } from './car-loans/car-loans.module'
 import { OtherLoansModule } from './other-loans/other-loans.module'
@@ -25,9 +23,7 @@ import { UsersModule } from './users/users.module'
     AddressModule,
     IncomePaymentsModule,
     MonthlyExpensesModule,
-    AssetsModule,
     FinancialAssetsModule,
-    LiabilitiesModule,
     CreditCardsModule,
     CarLoansModule,
     OtherLoansModule,

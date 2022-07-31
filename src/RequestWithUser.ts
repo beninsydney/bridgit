@@ -15,6 +15,7 @@ export class RequestWithUser implements NestMiddleware {
     this.usersService = new UsersService(User)
     this.applicationsService = new ApplicationsService(Application)
   }
+
   async use (req: Record<string, any>, _, next: NextFunction): Promise<void> {
     const userid: string = req.headers.userid as string
     let user: User | null | undefined

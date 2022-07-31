@@ -37,15 +37,6 @@ export class Application extends Model {
   @Column
   additionalFundsNote?: string
 
-  @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  applicants?: Guid[]
-
-  @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  buyingProperties?: Guid[]
-
-  @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  sellingProperties?: Guid[]
-
   @Column({ type: DataTypes.INTEGER })
   heardOfBridgit?: Origin
 

@@ -28,48 +28,54 @@ export class Property extends Model {
   @Column({ type: DataTypes.INTEGER })
   type?: PropertyType
 
-  @Column
-  beenListedForSale?: boolean
+  @Column({ type: DataTypes.BOOLEAN })
+  beenListedForSale?: boolean | undefined
 
-  @Column
-  isSold?: boolean
+  @Column({ type: DataTypes.BOOLEAN })
+  isSold?: boolean | undefined
 
-  @Column
-  estimatedPropertyPrice?: number
+  @Column({ type: DataTypes.BOOLEAN })
+  isBuying?: boolean | undefined
 
-  @Column
-  hasMortgage?: boolean
+  @Column({ type: DataTypes.BOOLEAN })
+  isSelling?: boolean | undefined
 
-  @Column
-  outstandingMortgageAmount?: number
+  @Column({ type: DataTypes.INTEGER })
+  estimatedPropertyPrice?: number | undefined
+
+  @Column({ type: DataTypes.BOOLEAN })
+  hasMortgage?: boolean | undefined
+
+  @Column({ type: DataTypes.INTEGER })
+  outstandingMortgageAmount?: number | undefined
 
   @Column({ type: DataTypes.STRING(64) })
   address?: Guid
 
-  @Column
-  depositAmount?: number
+  @Column({ type: DataTypes.INTEGER })
+  depositAmount?: number | undefined
 
-  @Column
-  purchasePrice?: number
+  @Column({ type: DataTypes.INTEGER })
+  purchasePrice?: number | undefined
 
   @Column({ type: DataTypes.DATEONLY })
-  purchaseDate?: Date
+  purchaseDate?: Date | undefined
 
   @Column({ type: DataTypes.INTEGER })
-  depositPayment?: DepositMethod
+  depositPayment?: DepositMethod | undefined
 
   @Column({ type: DataTypes.INTEGER })
-  stampDutyPayment?: StampDutyPaymentMethod
+  stampDutyPayment?: StampDutyPaymentMethod | undefined
 
-  @Column
-  propertyValue?: number
+  @Column({ type: DataTypes.INTEGER })
+  propertyValue?: number | undefined
 
-  @Column
-  monthlyRentalIncome?: number
+  @Column({ type: DataTypes.INTEGER })
+  monthlyRentalIncome?: number | undefined
 
-  @Column
-  amountOwing?: number
+  @Column({ type: DataTypes.INTEGER })
+  amountOwing?: number | undefined
 
-  @Column
-  mortgageLimit?: number
+  @Column({ type: DataTypes.INTEGER })
+  mortgageLimit?: number | undefined
 }

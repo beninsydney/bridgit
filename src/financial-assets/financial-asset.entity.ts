@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
 import { Table, Column, Model } from 'sequelize-typescript'
+import { AssetType } from 'src/AssetType'
 
 @Table
 export class FinancialAsset extends Model {
@@ -21,6 +22,9 @@ export class FinancialAsset extends Model {
 
   @Column({ type: DataTypes.STRING(64) })
   applicantid!: Guid
+
+  @Column({ type: DataTypes.INTEGER })
+  type!: AssetType
 
   @Column
   amount?: number

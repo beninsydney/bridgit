@@ -58,9 +58,6 @@ export class Applicant extends Model {
   @Column({ type: DataTypes.STRING(64) })
   address?: Guid
 
-  @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  incomePayments?: Guid[]
-
   @Column
   incomeChanging?: boolean
 
@@ -72,9 +69,6 @@ export class Applicant extends Model {
 
   @Column
   dependents?: number
-
-  @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  monthlyExpenses?: Guid[]
 
   @Column
   monthlyExpensesChanging?: boolean
