@@ -15,7 +15,6 @@ import { OtherLoansModule } from './other-loans/other-loans.module'
 import { PropertyOwnersModule } from './property-owners/property-owners.module'
 import { UsersModule } from './users/users.module'
 import { ServeStaticModule} from '@nestjs/serve-static'
-import { join } from 'path'
 
 @Module({
   imports: [
@@ -32,7 +31,7 @@ import { join } from 'path'
     PropertyOwnersModule,
     UsersModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client/dist')
+      rootPath: process.env.CLIENT_PATH
     })
   ],
   controllers: [AppController],
