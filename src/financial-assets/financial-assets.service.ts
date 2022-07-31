@@ -33,8 +33,8 @@ export class FinancialAssetsService {
   async findOne (applicationid: Guid, id: Guid): Promise<FinancialAsset> {
     const object = await this.model.findOne<FinancialAsset>({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -46,8 +46,8 @@ export class FinancialAssetsService {
   async update (applicationid: Guid, id: Guid, updateFinancialAssetDto: UpdateFinancialAssetDto): Promise<FinancialAsset> {
     const object = await this.model.findOne({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -59,8 +59,8 @@ export class FinancialAssetsService {
   async remove (applicationid: Guid, id: Guid): Promise<void> {
     const affected = await this.model.destroy({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (affected === 0) {

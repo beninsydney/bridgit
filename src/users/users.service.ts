@@ -21,7 +21,7 @@ export class UsersService {
   async findOne (id: Guid): Promise<User> {
     const object = await this.model.findOne<User>({
       where: {
-        id
+        id: id.toString()
       }
     })
     if (object == null) {

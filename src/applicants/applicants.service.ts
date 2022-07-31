@@ -31,8 +31,8 @@ export class ApplicantsService {
   async findOne (applicationid: Guid, id: Guid): Promise<Applicant> {
     const object = await this.model.findOne<Applicant>({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -44,8 +44,8 @@ export class ApplicantsService {
   async update (applicationid: Guid, id: Guid, updateApplicantDto: UpdateApplicantDto): Promise<Applicant> {
     const object = await this.model.findOne({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -57,8 +57,8 @@ export class ApplicantsService {
   async remove (applicationid: Guid, id: Guid): Promise<void> {
     const affected = await this.model.destroy({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (affected === 0) {

@@ -33,8 +33,8 @@ export class PropertiesService {
   async findOne (applicationid: Guid, id: Guid): Promise<Property> {
     const object = await this.model.findOne<Property>({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -46,8 +46,8 @@ export class PropertiesService {
   async update (applicationid: Guid, id: Guid, updatePropertyDto: UpdatePropertyDto): Promise<Property> {
     const object = await this.model.findOne({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -59,8 +59,8 @@ export class PropertiesService {
   async remove (applicationid: Guid, id: Guid): Promise<void> {
     const affected = await this.model.destroy({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (affected === 0) {

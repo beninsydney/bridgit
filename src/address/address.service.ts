@@ -33,8 +33,8 @@ export class AddressService {
   async findOne (applicationid: Guid, id: Guid): Promise<Address> {
     const object = await this.model.findOne<Address>({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
@@ -46,8 +46,8 @@ export class AddressService {
   async update (applicationid: Guid, id: Guid, updateAddressDto: UpdateAddressDto): Promise<Address> {
     const object = await this.model.findOne({
       where: {
-        id,
-        applicationid
+        id: id.toString(),
+        applicationid: applicationid.toString()
       }
     })
     if (object == null) {
