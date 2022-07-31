@@ -1,9 +1,9 @@
 import { Table, Column, Model } from 'sequelize-typescript'
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
-import { AdditionalFundsReason } from '../AdditionalFundsReason'
-import { Origin } from '../Origin'
-import { LoanPurpose } from '../LoanPurpose'
+import { AdditionalFundsReason } from '../enums/AdditionalFundsReason'
+import { Origin } from '../enums/Origin'
+import { LoanPurpose } from '../enums/LoanPurpose'
 
 @Table
 export class Application extends Model {

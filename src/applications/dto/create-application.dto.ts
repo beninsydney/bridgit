@@ -1,5 +1,5 @@
-import { AdditionalFundsReason } from 'src/AdditionalFundsReason'
-import { LoanPurpose } from 'src/LoanPurpose'
+import { AdditionalFundsReason } from '../../enums/AdditionalFundsReason'
+import { LoanPurpose } from '../../enums/LoanPurpose'
 
 export class CreateApplicationDto {
   loanPurpose?: LoanPurpose | undefined

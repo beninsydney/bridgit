@@ -1,9 +1,9 @@
 import { Table, Column, Model } from 'sequelize-typescript'
 import { Guid } from 'guid-typescript'
 import { DataTypes } from 'sequelize'
-import { Gender } from 'src/Gender'
-import { Relationship } from 'src/Relationship'
-import { RelationshipStatus } from 'src/RelationshipStatus'
+import { Gender } from 'src/enums/Gender'
+import { Relationship } from 'src/enums/Relationship'
+import { RelationshipStatus } from 'src/enums/RelationshipStatus'
 
 @Table
 export class Applicant extends Model {

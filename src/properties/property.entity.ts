@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
 import { Table, Column, Model } from 'sequelize-typescript'
-import { DepositMethod } from '../DepositMethods'
-import { PropertyType } from '../PropertyType'
-import { StampDutyPaymentMethod } from '../StampDutyPaymentMethod'
+import { DepositMethod } from '../enums/DepositMethods'
+import { PropertyType } from '../enums/PropertyType'
+import { StampDutyPaymentMethod } from '../enums/StampDutyPaymentMethod'
 
 @Table
 export class Property extends Model {

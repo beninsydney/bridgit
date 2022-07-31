@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { Guid } from 'guid-typescript'
 import { Table, Column, Model } from 'sequelize-typescript'
-import { AssetType } from 'src/AssetType'
+import { AssetType } from '../enums/AssetType'
 
 @Table
 export class FinancialAsset extends Model {

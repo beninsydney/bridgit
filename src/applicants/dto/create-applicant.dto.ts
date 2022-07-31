@@ -1,7 +1,7 @@
 import { Guid } from 'guid-typescript'
-import { Gender } from 'src/Gender'
-import { Relationship } from 'src/Relationship'
-import { RelationshipStatus } from 'src/RelationshipStatus'
+import { Gender } from '../../enums/Gender'
+import { Relationship } from '../../enums/Relationship'
+import { RelationshipStatus } from '../../enums/RelationshipStatus'
 
 export class CreateApplicantDto {
   relationship?: Relationship | undefined
