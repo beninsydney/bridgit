@@ -1,4 +1,4 @@
-import { Injectable, Inject, Scope, Controller, Body, Patch, Param, Delete } from '@nestjs/common'
+import { Injectable, Inject, Scope, Controller, Get, Body, Patch, Param, Delete, ConsoleLogger } from '@nestjs/common'
 import { ApplicationsService } from './applications.service'
 import { UpdateApplicationDto } from './dto/update-application.dto'
 import { Guid } from 'guid-typescript'
@@ -17,6 +17,12 @@ export class ApplicationsController {
   async update (@Param('id') id: Guid, @Body() updateApplicationDto: UpdateApplicationDto): Promise<Application> {
     const { user } = this.request
     return await this.applicationsService.update(user.id, id, updateApplicationDto)
+  }
+
+  @Get()
+  async findOne (): Promise<Application> {
+    const { application } = this.request
+    return application
   }
 
   @Delete(':id')
