@@ -3,31 +3,72 @@
     <h1>What is your loan purpose?</h1>
     <ul>
       <li>
-        <EntryButton title="Buy now, sell later" blurb="I've found the perfect property" link="/buying" />
+        <EntryButton @click="selectPurpose" id="BuyNowSellLater" title="Buy now, sell later" blurb="I've found the perfect property" link="/step1" />
       </li>
       <li>
-        <EntryButton title="Renovate before I sell" blurb="I require additional funds to renovate my property before sale" link="/buying" />
+        <EntryButton @click="selectPurpose" id="Renovate" title="Renovate before I sell" blurb="I require additional funds to renovate my property before sale" link="/buying" />
       </li>
       <li>
-        <EntryButton title="Cash advance on the sale of my property" blurb="I need access to funds fast before I sell my property" link="/buying" />
+        <EntryButton @click="selectPurpose" id="CashAdvance" title="Cash advance on the sale of my property" blurb="I need access to funds fast before I sell my property" link="/buying" />
       </li>
     </ul>
   </main>
 </template>
 
 <script setup lang="ts">
-import EntryButton from '@/components/EntryButton.vue'; // @ is an alias to /src
+import EntryButton from '@/components/EntryButton.vue';
 </script>
 <script lang="ts">
-import axios from 'axios';
+import axios from 'axios'
+let userid: string, applicationid: string
 
 export default {
-  data() {
-    return {};
+  async mounted () {
+    userid = localStorage.getItem('userid') as string
+    applicationid = localStorage.getItem('applicationid') as string
+    if (userid && applicationid) {
+      return
+    }
+    const user = await axios.get('/api/users')
+    userid = user.data.id
+    const application = await axios.get('/api/applications', {
+      headers: {
+        userid
+      }
+    })
+    applicationid = application.data.id
+    localStorage.setItem('userid', userid)
+    localStorage.setItem('applicationid', applicationid)
   },
-  async mounted() {
-    const data = await axios.get("/api/users")
-    console.log('got user data', data)
+  methods: {
+    selectPurpose: async function (event:Event) {
+      event.preventDefault()
+      const target = event.target as HTMLInputElement
+      const buttonid: string = target.id
+      let loanPurpose = 0
+      let destination = '/buying-plans'
+      if (buttonid === 'BuyNowSellLater') {
+        loanPurpose = 1
+        destination = '/property-type'
+      } else if(buttonid === 'Renovate') {
+        loanPurpose = 2
+      } else if (buttonid === 'CashAdvance') {
+        loanPurpose = 3
+      }
+      const res = await axios.patch(`/api/applications/${applicationid}`, {
+          loanPurpose 
+        }, {
+          headers: {
+            'content-type': 'application/json',
+            userid,
+            applicationid
+          }
+      })
+      // if (!res.loanPurpose) {
+      //   TODO: something went wrong
+      // }
+      window.location.href = destination
+    }
   }
 };
 </script>
