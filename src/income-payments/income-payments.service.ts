@@ -1,50 +1,70 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CreateIncomePaymentDto } from './dto/create-income-payment.dto';
-import { UpdateIncomePaymentDto } from './dto/update-income-payment.dto';
-import { IncomePayment } from './income-payment.entity';
+import { Injectable, Inject } from '@nestjs/common'
+import { CreateIncomePaymentDto } from './dto/create-income-payment.dto'
+import { UpdateIncomePaymentDto } from './dto/update-income-payment.dto'
+import { IncomePayment } from './income-payment.entity'
 import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class IncomePaymentsService {
-  constructor(
+  constructor (
     @Inject('INCOME_PAYMENTS_REPOSITORY')
-    private model: typeof IncomePayment
+    private readonly model: typeof IncomePayment
   ) {}
 
-  async create(createIncomePaymentDto: CreateIncomePaymentDto): Promise<IncomePayment> {
+  async create (userid: Guid, applicationid: Guid, applicantid: Guid, createIncomePaymentDto: CreateIncomePaymentDto): Promise<IncomePayment> {
     const object = new IncomePayment()
     for (const field in createIncomePaymentDto) {
       object[field] = createIncomePaymentDto[field]
     }
-    return object.save()
+    object.userid = userid
+    object.applicationid = applicationid
+    object.applicantid = applicantid
+    return await object.save()
   }
 
-  async findAll(): Promise<IncomePayment[]> {
-    return this.model.findAll<IncomePayment>()
-  }
-
-  async findOne(id: Guid): Promise<IncomePayment> {
-    return this.model.findOne<IncomePayment>({
+  async findAll (applicationid: Guid): Promise<IncomePayment[]> {
+    return await this.model.findAll<IncomePayment>({
       where: {
-        id
+        applicationid
       }
     })
   }
 
-  async update(id: Guid, updateIncomePaymentDto: UpdateIncomePaymentDto): Promise<IncomePayment> {
+  async findOne (applicationid: Guid, id: Guid): Promise<IncomePayment> {
+    const object = await this.model.findOne<IncomePayment>({
+      where: {
+        id,
+        applicationid
+      }
+    })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
+    return object
+  }
+
+  async update (applicationid: Guid, id: Guid, updateIncomePaymentDto: UpdateIncomePaymentDto): Promise<IncomePayment> {
     const object = await this.model.findOne({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
     return await object.update(updateIncomePaymentDto)
   }
 
-  async remove(id: Guid): Promise<void> {
-    await this.model.destroy({
+  async remove (applicationid: Guid, id: Guid): Promise<void> {
+    const affected = await this.model.destroy({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (affected === 0) {
+      throw new Error('invalid-id')
+    }
   }
 }

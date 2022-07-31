@@ -1,50 +1,70 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CarLoan } from './car-loan.entity';
-import { CreateCarLoanDto } from './dto/create-car-loan.dto';
-import { UpdateCarLoanDto } from './dto/update-car-loan.dto';
+import { Injectable, Inject } from '@nestjs/common'
+import { CarLoan } from './car-loan.entity'
+import { CreateCarLoanDto } from './dto/create-car-loan.dto'
+import { UpdateCarLoanDto } from './dto/update-car-loan.dto'
 import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class CarLoansService {
-  constructor(
+  constructor (
     @Inject('CAR_LOANS_REPOSITORY')
-    private model: typeof CarLoan
+    private readonly model: typeof CarLoan
   ) {}
 
-  async create(createCarLoanDto: CreateCarLoanDto): Promise<CarLoan> {
+  async create (userid: Guid, applicationid: Guid, applicantid: Guid, createCarLoanDto: CreateCarLoanDto): Promise<CarLoan> {
     const object = new CarLoan()
     for (const field in createCarLoanDto) {
       object[field] = createCarLoanDto[field]
     }
-    return object.save()
+    object.userid = userid
+    object.applicationid = applicationid
+    object.applicantid = applicantid
+    return await object.save()
   }
 
-  async findAll(): Promise<CarLoan[]> {
-    return this.model.findAll<CarLoan>()
-  }
-
-  async findOne(id: Guid): Promise<CarLoan> {
-    return this.model.findOne<CarLoan>({
+  async findAll (applicationid: Guid): Promise<CarLoan[]> {
+    return await this.model.findAll<CarLoan>({
       where: {
-        id
+        applicationid
       }
     })
   }
 
-  async update(id: Guid, updateCarLoanDto: UpdateCarLoanDto): Promise<CarLoan> {
+  async findOne (applicationid: Guid, id: Guid): Promise<CarLoan> {
+    const object = await this.model.findOne<CarLoan>({
+      where: {
+        id,
+        applicationid
+      }
+    })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
+    return object
+  }
+
+  async update (applicationid: Guid, id: Guid, updateCarLoanDto: UpdateCarLoanDto): Promise<CarLoan> {
     const object = await this.model.findOne({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
     return await object.update(updateCarLoanDto)
   }
 
-  async remove(id: Guid): Promise<void> {
-    await this.model.destroy({
+  async remove (applicationid: Guid, id: Guid): Promise<void> {
+    const affected = await this.model.destroy({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (affected === 0) {
+      throw new Error('invalid-id')
+    }
   }
 }

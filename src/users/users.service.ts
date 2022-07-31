@@ -1,36 +1,43 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { User } from './user.entity';
-import { Guid } from 'guid-typescript';
+import { Injectable, Inject } from '@nestjs/common'
+import { User } from './user.entity'
+import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class UsersService {
-  constructor(
+  constructor (
     @Inject('USERS_REPOSITORY')
-    private model: typeof User
+    private readonly model: typeof User
   ) {}
 
-  async create(): Promise<User> {
+  async create (): Promise<User> {
     const object = new User()
-    return object.save()
+    return await object.save()
   }
 
-  async findAll(): Promise<User[]> {
-    return this.model.findAll<User>()
+  async findAll (): Promise<User[]> {
+    return await this.model.findAll<User>()
   }
 
-  async findOne(id: Guid): Promise<User> {
-    return this.model.findOne<User>({
+  async findOne (id: Guid): Promise<User> {
+    const object = await this.model.findOne<User>({
       where: {
         id
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
+    return object
   }
 
-  async remove(id: Guid): Promise<void> {
-    await this.model.destroy({
+  async remove (id: Guid): Promise<void> {
+    const affected = await this.model.destroy({
       where: {
         id
       }
     })
+    if (affected === 0) {
+      throw new Error('invalid-id')
+    }
   }
 }

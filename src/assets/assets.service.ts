@@ -1,50 +1,69 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Asset } from './asset.entity';
-import { CreateAssetDto } from './dto/create-asset.dto';
-import { UpdateAssetDto } from './dto/update-asset.dto';
+import { Injectable, Inject } from '@nestjs/common'
+import { Asset } from './asset.entity'
+import { CreateAssetDto } from './dto/create-asset.dto'
+import { UpdateAssetDto } from './dto/update-asset.dto'
 import { Guid } from 'guid-typescript'
 
 @Injectable()
 export class AssetsService {
-  constructor(
+  constructor (
     @Inject('ASSETS_REPOSITORY')
-    private model: typeof Asset
+    private readonly model: typeof Asset
   ) {}
 
-  async create(createAssetDto: CreateAssetDto): Promise<Asset> {
+  async create (userid: Guid, applicationid: Guid, applicantid: Guid, createAssetDto: CreateAssetDto): Promise<Asset> {
     const object = new Asset()
     for (const field in createAssetDto) {
       object[field] = createAssetDto[field]
     }
-    return object.save()
+    object.userid = userid
+    object.applicationid = applicationid
+    object.applicantid = applicantid
+    return await object.save()
   }
 
-  async findAll(): Promise<Asset[]> {
-    return this.model.findAll<Asset>()
-  }
-
-  async findOne(id: Guid): Promise<Asset> {
-    return this.model.findOne<Asset>({
+  async findAll (applicationid: Guid): Promise<Asset[]> {
+    return await this.model.findAll<Asset>({
       where: {
-        id
+        applicationid
       }
     })
   }
 
-  async update(id: Guid, updateAssetDto: UpdateAssetDto): Promise<Asset> {
+  async findOne (applicationid: Guid, id: Guid): Promise<Asset> {
+    const object = await this.model.findOne<Asset>({
+      where: {
+        id,
+        applicationid
+      }
+    })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
+    return object
+  }
+
+  async update (applicationid: Guid, id: Guid, updateAssetDto: UpdateAssetDto): Promise<Asset> {
     const object = await this.model.findOne({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
     return await object.update(updateAssetDto)
   }
 
-  async remove(id: Guid): Promise<void> {
-    await this.model.destroy({
+  async remove (applicationid: Guid, id: Guid): Promise<void> {
+    const affected = await this.model.destroy({
       where: {
         id
       }
     })
+    if (affected === 0) {
+      throw new Error('invalid-id')
+    }
   }
 }

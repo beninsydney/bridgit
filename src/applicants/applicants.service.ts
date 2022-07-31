@@ -1,54 +1,68 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Applicant } from './applicant.entity';
-import { CreateApplicantDto } from './dto/create-applicant.dto';
-import { UpdateApplicantDto } from './dto/update-applicant.dto';
+import { Inject } from '@nestjs/common'
+import { Applicant } from './applicant.entity'
+import { CreateApplicantDto } from './dto/create-applicant.dto'
+import { UpdateApplicantDto } from './dto/update-applicant.dto'
 import { Guid } from 'guid-typescript'
 
-@Injectable()
 export class ApplicantsService {
-  constructor(
+  constructor (
     @Inject('APPLICANTS_REPOSITORY')
-    private model: typeof Applicant
+    private readonly model: typeof Applicant
   ) {}
 
-  async create(createApplicantDto: CreateApplicantDto): Promise<Applicant> {
+  async create (userid: Guid, applicationid: Guid, createApplicantDto: CreateApplicantDto): Promise<Applicant> {
     const object = new Applicant()
     for (const field in createApplicantDto) {
       object[field] = createApplicantDto[field]
     }
-    return object.save()
+    object.userid = userid
+    object.applicationid = applicationid
+    return await object.save()
   }
 
-  async findAll(applicationid?: Guid): Promise<Applicant[]> {
-    return this.model.findAll<Applicant>({
+  async findAll (applicationid?: Guid): Promise<Applicant[]> {
+    return await this.model.findAll<Applicant>({
       where: {
         applicationid
       }
     })
   }
 
-  async findOne(id: Guid): Promise<Applicant> {
-    return this.model.findOne<Applicant>({
+  async findOne (applicationid: Guid, id: Guid): Promise<Applicant> {
+    const object = await this.model.findOne<Applicant>({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
+    return object
   }
 
-  async update(id: Guid, updateApplicantDto: UpdateApplicantDto): Promise<Applicant> {
+  async update (applicationid: Guid, id: Guid, updateApplicantDto: UpdateApplicantDto): Promise<Applicant> {
     const object = await this.model.findOne({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (object == null) {
+      throw new Error('invalid-id')
+    }
     return await object.update(updateApplicantDto)
   }
 
-  async remove(id: Guid): Promise<void> {
-    await this.model.destroy({
+  async remove (applicationid: Guid, id: Guid): Promise<void> {
+    const affected = await this.model.destroy({
       where: {
-        id
+        id,
+        applicationid
       }
     })
+    if (affected === 0) {
+      throw new Error('invalid-id')
+    }
   }
 }
