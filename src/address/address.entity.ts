@@ -23,20 +23,20 @@ export class Address extends Model {
   applicantid?: Guid
 
   @Column
-  line1: string
+  line1?: string
 
   @Column
   line2?: string
 
   @Column
-  city: string
+  city?: string
 
   @Column
-  state: string
+  state?: string
 
   @Column
-  postalCode: string
+  postalCode?: string
 
   @Column
-  country: string
+  country?: string
 }

@@ -23,11 +23,11 @@ export class CreditCard extends Model {
   applicantid!: Guid
 
   @Column
-  institution: String
+  institution?: String
 
   @Column
-  creditLimit: number
+  creditLimit?: number
 
   @Column
-  amountOwing: number
+  amountOwing?: number
 }

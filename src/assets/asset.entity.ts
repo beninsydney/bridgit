@@ -23,14 +23,14 @@ export class Asset extends Model {
   applicantid!: Guid
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  properties: Guid[]
+  properties?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  savings: Guid[]
+  savings?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  shares: Guid[]
+  shares?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  superannuation: Guid[]
+  superannuation?: Guid[]
 }

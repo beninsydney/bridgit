@@ -14,11 +14,17 @@ export class PropertyOwner extends Model {
   id!: Guid
 
   @Column({ type: DataTypes.STRING(64) })
+  userid!: Guid
+
+  @Column({ type: DataTypes.STRING(64) })
+  applicationid!: Guid
+
+  @Column({ type: DataTypes.STRING(64) })
   applicantid!: Guid
 
   @Column({ type: DataTypes.STRING(64) })
   propertyid!: Guid
 
-  @Column
-  percent: number
+  @Column({ type: DataTypes.INTEGER })
+  percent: number | undefined
 }

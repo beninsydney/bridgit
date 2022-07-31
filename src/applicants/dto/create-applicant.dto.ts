@@ -4,26 +4,24 @@ import { Relationship } from 'src/Relationship'
 import { RelationshipStatus } from 'src/RelationshipStatus'
 
 export class CreateApplicantDto {
-  userid: Guid
-  applicationid: Guid
-  relationship: Relationship
-  relationshipNote: string
-  firstName: string
-  middleName: string
-  lastName: string
-  preferredName: string
-  gender: Gender
-  genderNote: string
-  dateOfBirth: Date
-  mobilePhone: string
-  email: string
-  address: Guid
-  incomePayments: Guid[]
-  incomeChanging: boolean
-  incomeChangingNote: String
-  relationshipStatus: RelationshipStatus
-  dependents: number
-  monthlyExpenses: Guid[]
-  monthlyExpensesChanging: boolean
-  monthlyExpensesChangingAmount: number
+  relationship?: Relationship | undefined
+  relationshipNote?: string
+  firstName?: string
+  middleName?: string
+  lastName?: string
+  preferredName?: string
+  gender?: Gender | undefined
+  genderNote?: string
+  dateOfBirth?: Date | undefined
+  mobilePhone?: string
+  email?: string
+  address?: Guid | undefined
+  incomePayments?: Guid[] | undefined
+  incomeChanging?: boolean | undefined
+  incomeChangingNote?: String
+  relationshipStatus?: RelationshipStatus | undefined
+  dependents?: number
+  monthlyExpenses?: Guid[] | undefined
+  monthlyExpensesChanging?: boolean | undefined
+  monthlyExpensesChangingAmount?: number | undefined
 }

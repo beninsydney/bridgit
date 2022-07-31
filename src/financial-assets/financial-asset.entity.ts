@@ -23,8 +23,8 @@ export class FinancialAsset extends Model {
   applicantid!: Guid
 
   @Column
-  amount: number
+  amount?: number
 
   @Column
-  institution: String
+  institution?: String
 }

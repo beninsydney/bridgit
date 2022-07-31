@@ -23,14 +23,14 @@ export class OtherLoan extends Model {
   applicantid!: Guid
 
   @Column
-  description: String
+  description?: String
 
   @Column
-  liabilityLimit: number
+  liabilityLimit?: number
 
   @Column
-  amountOwing: number
+  amountOwing?: number
 
   @Column
-  monthlyRepayment: number
+  monthlyRepayment?: number
 }

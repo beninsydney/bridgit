@@ -1,10 +1,7 @@
 import { Guid } from 'guid-typescript'
 
 export class CreateLiabilityDto {
-  userid: Guid
-  applicationid: Guid
-  applicantid: Guid
-  creditCards: Guid[]
-  carLoans: Guid[]
-  otherLoans: Guid[]
+  creditCards?: Guid[] | undefined
+  carLoans?: Guid[] | undefined
+  otherLoans?: Guid[] | undefined
 }

@@ -25,11 +25,11 @@ export class IncomePayment extends Model {
   applicantid!: Guid
 
   @Column({ type: DataTypes.INTEGER })
-  source: IncomeSource
+  source?: IncomeSource
 
   @Column({ type: DataTypes.INTEGER })
-  period: TimePeriod
+  period?: TimePeriod
 
   @Column
-  amount: number
+  amount?: number
 }

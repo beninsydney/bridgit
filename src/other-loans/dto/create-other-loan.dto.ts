@@ -1,11 +1,6 @@
-import { Guid } from 'guid-typescript'
-
 export class CreateOtherLoanDto {
-  userid: Guid
-  applicationid: Guid
-  applicantid: Guid
-  description: String
-  liabilityLimit: number
-  amountOwing: number
-  monthlyRepayment: number
+  description?: String
+  liabilityLimit?: number | undefined
+  amountOwing?: number | undefined
+  monthlyRepayment?: number | undefined
 }

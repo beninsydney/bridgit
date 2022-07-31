@@ -24,8 +24,8 @@ export class MonthlyExpense extends Model {
   applicantid!: Guid
 
   @Column({ type: DataTypes.INTEGER })
-  type: ExpenseType
+  type?: ExpenseType
 
   @Column
-  amount: number
+  amount?: number
 }

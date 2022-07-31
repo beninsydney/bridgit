@@ -23,62 +23,62 @@ export class Applicant extends Model {
   applicationid!: Guid
 
   @Column({ type: DataTypes.INTEGER })
-  relationship: Relationship
+  relationship?: Relationship
 
   @Column
-  relationshipNote: string
+  relationshipNote?: string
 
   @Column
-  firstName: string
+  firstName?: string
 
   @Column
-  middleName: string
+  middleName?: string
 
   @Column
-  lastName: string
+  lastName?: string
 
   @Column
-  preferredName: string
+  preferredName?: string
+
+  @Column({ type: DataTypes.INTEGER })
+  gender?: Gender
 
   @Column
-  gender: Gender
-
-  @Column
-  genderNote: string
+  genderNote?: string
 
   @Column({ type: DataTypes.DATEONLY })
-  dateOfBirth: Date
+  dateOfBirth?: Date
 
   @Column
-  mobilePhone: string
+  mobilePhone?: string
 
   @Column
-  email: string
+  email?: string
 
   @Column({ type: DataTypes.STRING(64) })
-  address: Guid
+  address?: Guid
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  incomePayments: Guid[]
+  incomePayments?: Guid[]
 
   @Column
-  incomeChanging: boolean
+  incomeChanging?: boolean
 
   @Column
-  incomeChangingNote: String
+  incomeChangingNote?: String
 
   @Column
-  relationshipStatus: RelationshipStatus
+  relationshipStatus?: RelationshipStatus
 
   @Column
-  dependents: number
+  dependents?: number
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  monthlyExpenses: Guid[]
+  monthlyExpenses?: Guid[]
 
   @Column
-  monthlyExpensesChanging: boolean
+  monthlyExpensesChanging?: boolean
 
   @Column
-  monthlyExpensesChangingAmount: number
+  monthlyExpensesChangingAmount?: number
 }

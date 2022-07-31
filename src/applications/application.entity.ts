@@ -20,62 +20,62 @@ export class Application extends Model {
   userid!: Guid
 
   @Column({ type: DataTypes.INTEGER })
-  loanPurpose: LoanPurpose
+  loanPurpose?: LoanPurpose
 
   @Column
-  savingsContribution: number
+  savingsContribution?: number
 
   @Column
-  giftedSavingsAmount: number
+  giftedSavingsAmount?: number
 
   @Column
-  additionalFundsRequest: number
+  additionalFundsRequest?: number
 
   @Column({ type: DataTypes.INTEGER })
-  additionalFundsReason: AdditionalFundsReason
+  additionalFundsReason?: AdditionalFundsReason
 
   @Column
-  additionalFundsNote: string
+  additionalFundsNote?: string
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  applicants: Guid[]
+  applicants?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  buyingProperties: Guid[]
+  buyingProperties?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  sellingProperties: Guid[]
+  sellingProperties?: Guid[]
 
   @Column({ type: DataTypes.INTEGER })
-  heardOfBridgit: Origin
+  heardOfBridgit?: Origin
 
   @Column
-  heardOfBridgitNote: string
+  heardOfBridgitNote?: string
 
   @Column
-  beenBankruptOrInsolvent: boolean
+  beenBankruptOrInsolvent?: boolean
 
   @Column
-  shareholderOfManagedRecievedLiquidatedCompany: boolean
+  shareholderOfManagedRecievedLiquidatedCompany?: boolean
 
   @Column
-  hasUnsatisfactoryJudgements: boolean
+  hasUnsatisfactoryJudgements?: boolean
 
   @Column
-  hasOtherAdverseFactors: boolean
+  hasOtherAdverseFactors?: boolean
 
   @Column
-  over18: boolean
+  over18?: boolean
 
   @Column
-  consentToUseOfPII: boolean
+  consentToUseOfPII?: boolean
 
   @Column
-  authorizedToSubmitPII: boolean
+  authorizedToSubmitPII?: boolean
 
   @Column
-  agreeToPrivacyAndIdentityCheck: boolean
+  agreeToPrivacyAndIdentityCheck?: boolean
 
   @Column
-  talkToTeam: boolean
+  talkToTeam?: boolean
 }

@@ -1,14 +1,9 @@
-import { Guid } from 'guid-typescript'
-
 export class CreateCarLoanDto {
-  userid: Guid
-  applicationid: Guid
-  applicantid: Guid
-  vehicleMake: String
-  model: String
-  yearPurchased: number
-  assetValue: number
-  liabilityLimit: number
-  amountOwing: number
-  monthlyRepayment: number
+  vehicleMake?: String
+  model?: String
+  yearPurchased?: number | undefined
+  assetValue?: number | undefined
+  liabilityLimit?: number | undefined
+  amountOwing?: number | undefined
+  monthlyRepayment?: number | undefined
 }

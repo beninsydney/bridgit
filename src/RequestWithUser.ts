@@ -9,7 +9,7 @@ import { Application } from './applications/application.entity'
 export class RequestWithUser implements NestMiddleware {
   async use (req: Record<string, any>, _, next: NextFunction): Promise<void> {
     const userid: string = req.headers.userid as string
-    let user: User
+    let user: User | null | undefined
     if (userid !== null && userid !== '') {
       user = await User.findOne({
         where: {
@@ -22,7 +22,7 @@ export class RequestWithUser implements NestMiddleware {
     } else {
       user = await User.create()
     }
-    let application = await Application.findOne({
+    let application: Application | null | undefined = await Application.findOne({
       where: {
         userid: user.id.toString()
       }

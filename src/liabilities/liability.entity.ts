@@ -23,11 +23,11 @@ export class Liability extends Model {
   applicantid!: Guid
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  creditCards: Guid[]
+  creditCards?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  carLoans: Guid[]
+  carLoans?: Guid[]
 
   @Column({ type: DataTypes.ARRAY(DataTypes.STRING(64)) })
-  otherLoans: Guid[]
+  otherLoans?: Guid[]
 }

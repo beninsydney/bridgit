@@ -23,23 +23,23 @@ export class CarLoan extends Model {
   applicantid!: Guid
 
   @Column
-  vehicleMake: String
+  vehicleMake?: String
 
   @Column
-  model: String
+  model?: String
 
   @Column
-  yearPurchased: number
+  yearPurchased?: number
 
   @Column
-  assetValue: number
+  assetValue?: number
 
   @Column
-  liabilityLimit: number
+  liabilityLimit?: number
 
   @Column
-  amountOwing: number
+  amountOwing?: number
 
   @Column
-  monthlyRepayment: number
+  monthlyRepayment?: number
 }

@@ -4,22 +4,20 @@ import { PropertyType } from 'src/PropertyType'
 import { StampDutyPaymentMethod } from 'src/StampDutyPaymentMethod'
 
 export class CreatePropertyDto {
-  userid: Guid
-  applicationid: Guid
-  type: PropertyType
-  beenListedForSale: boolean
-  isSold: boolean
-  estimatedPropertyPrice: number
-  hasMortgage: boolean
-  outstandingMortgageAmount: number
-  address: Guid
-  depositAmount: number
-  purchasePrice: number
-  purchaseDate: Date
-  depositPayment: DepositMethod
-  stampDutyPayment: StampDutyPaymentMethod
-  propertyValue: number
-  monthlyRentalIncome: number
-  amountOwing: number
-  mortgageLimit: number
+  type?: PropertyType | undefined
+  beenListedForSale?: boolean | undefined
+  isSold?: boolean | undefined
+  estimatedPropertyPrice?: number | undefined
+  hasMortgage?: boolean | undefined
+  outstandingMortgageAmount?: number | undefined
+  address?: Guid | undefined
+  depositAmount?: number | undefined
+  purchasePrice?: number | undefined
+  purchaseDate?: Date | undefined
+  depositPayment?: DepositMethod | undefined
+  stampDutyPayment?: StampDutyPaymentMethod | undefined
+  propertyValue?: number | undefined
+  monthlyRentalIncome?: number | undefined
+  amountOwing?: number | undefined
+  mortgageLimit?: number | undefined
 }

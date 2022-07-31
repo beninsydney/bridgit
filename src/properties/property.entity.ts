@@ -22,51 +22,54 @@ export class Property extends Model {
   @Column({ type: DataTypes.STRING(64) })
   applicationid!: Guid
 
+  @Column({ type: DataTypes.STRING(64) })
+  applicantid!: Guid
+
   @Column({ type: DataTypes.INTEGER })
-  type: PropertyType
+  type?: PropertyType
 
   @Column
-  beenListedForSale: boolean
+  beenListedForSale?: boolean
 
   @Column
-  isSold: boolean
+  isSold?: boolean
 
   @Column
-  estimatedPropertyPrice: number
+  estimatedPropertyPrice?: number
 
   @Column
-  hasMortgage: boolean
+  hasMortgage?: boolean
 
   @Column
-  outstandingMortgageAmount: number
+  outstandingMortgageAmount?: number
 
   @Column({ type: DataTypes.STRING(64) })
-  address: Guid
+  address?: Guid
 
   @Column
-  depositAmount: number
+  depositAmount?: number
 
   @Column
-  purchasePrice: number
+  purchasePrice?: number
 
   @Column({ type: DataTypes.DATEONLY })
-  purchaseDate: Date
+  purchaseDate?: Date
 
   @Column({ type: DataTypes.INTEGER })
-  depositPayment: DepositMethod
+  depositPayment?: DepositMethod
 
   @Column({ type: DataTypes.INTEGER })
-  stampDutyPayment: StampDutyPaymentMethod
+  stampDutyPayment?: StampDutyPaymentMethod
 
   @Column
-  propertyValue: number
+  propertyValue?: number
 
   @Column
-  monthlyRentalIncome: number
+  monthlyRentalIncome?: number
 
   @Column
-  amountOwing: number
+  amountOwing?: number
 
   @Column
-  mortgageLimit: number
+  mortgageLimit?: number
 }
