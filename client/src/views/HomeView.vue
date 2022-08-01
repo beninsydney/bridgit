@@ -15,33 +15,22 @@
   </main>
 </template>
 
-<script setup lang="ts">
-import EntryButton from '@/components/EntryButton.vue';
-</script>
 <script lang="ts">
+import EntryButton from '../components/EntryButton.vue';
+import { defineComponent } from 'vue';
 import axios from 'axios'
-let userid: string, applicationid: string
 
-export default {
-  async mounted () {
-    userid = localStorage.getItem('userid') as string
-    applicationid = localStorage.getItem('applicationid') as string
-    if (userid && applicationid) {
-      return
-    }
-    const user = await axios.get('/api/users')
-    userid = user.data.id
-    const application = await axios.get('/api/applications', {
-      headers: {
-        userid
-      }
-    })
-    applicationid = application.data.id
-    localStorage.setItem('userid', userid)
-    localStorage.setItem('applicationid', applicationid)
+export default defineComponent({  
+  props: {
+    userid: String,
+    applicationid: String
+  },
+  components: {
+    EntryButton
   },
   methods: {
-    selectPurpose: async function (event:Event) {
+    async selectPurpose (event:Event) {
+      console.log('selected purpose.... this.props', this)
       event.preventDefault()
       const target = event.target as HTMLInputElement
       const buttonid: string = target.id
@@ -55,22 +44,22 @@ export default {
       } else if (buttonid === 'CashAdvance') {
         loanPurpose = 3
       }
-      const res = await axios.patch(`/api/applications/${applicationid}`, {
+      const res = await axios.patch(`/api/applications/${this.applicationid}`, {
           loanPurpose 
         }, {
           headers: {
             'content-type': 'application/json',
-            userid,
-            applicationid
+            userid: this.userid as string,
+            applicationid: this.applicationid as string
           }
       })
       // if (!res.loanPurpose) {
-      //   TODO: something went wrong
+        // TODO: something went wrong
       // }
       window.location.href = destination
     }
   }
-};
+})
 </script>
 
 <style>
